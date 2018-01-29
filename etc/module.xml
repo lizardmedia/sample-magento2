@@ -2,10 +2,18 @@
 <!--
 @author Maciej Sławik <maciej.slawik@lizardmedia.pl>
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
 
+    <!--Here we define the name of the module and the current version of the module-->
     <module name="LizardMedia_Sample" schema_version="1.0.0" setup_version="1.0.0">
+
+        <!--In here you can define the modules your module depends on.-->
+        <!--Magento will make sure your module is loaded after them.-->
+
+        <!--Like that-->
+        <!--<sequence>-->
+            <!--<module name="Magento_Catalog"/>-->
+        <!--</sequence>-->
 
     </module>
 

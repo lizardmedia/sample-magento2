@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+@author Maciej Sławik <maciej.slawik@lizardmedia.pl>
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+
+    <router id="standard">
+
+        <!--Here we define the id of the route and the front name of the route-->
+        <!--which is actually the first part of the URL-->
+        <route id="sample" frontName="sample">
+            <module name="LizardMedia_Sample" />
+        </route>
+
+    </router>
+
+</config>

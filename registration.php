@@ -6,6 +6,7 @@
  * Github       https://github.com/maciejslawik
  */
 
+//This registers the module in autoloading
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
     'LizardMedia_Sample',
