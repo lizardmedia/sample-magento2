@@ -1,0 +1,36 @@
+{
+  "name": "lizardmedia/sample",
+  "description": "Sample module for Magento 2",
+  "type": "magento2-module",
+  "license": [
+    "MIT"
+  ],
+  "authors": [
+    {
+      "name": "Maciej Sławik",
+      "email": "maciej.slawik@lizardmedia.pl"
+    }
+  ],
+  "require": {
+    "php": "^7.1.0",
+    "magento/framework": "^100.2.0",
+    "magento/module-backend": "^100.2.0"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://repo.magento.com/"
+    }
+  ],
+  "keywords": [
+    "Magento 2"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "LizardMedia\\Sample\\": ""
+    }
+  }
+}
