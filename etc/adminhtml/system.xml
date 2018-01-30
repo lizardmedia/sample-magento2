@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+@author Maciej Sławik <maciej.slawik@lizardmedia.pl>
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+
+    <!--system.xml defines configuration sections that should be added to admin panel.-->
+    <!--You can create a new tab or use an existing one and define groups and fields.-->
+    <system>
+        <tab id="lizardmedia" translate="label" sortOrder="10">
+            <label>Lizard Media</label>
+        </tab>
+        <section id="sample" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Sample</label>
+            <tab>lizardmedia</tab>
+            <resource>LizardMedia_Sample::sample_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Configuration</label>
+                <field id="bool" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Sample bool field</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="text" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Sample text field</label>
+                    <comment>Comment for a field</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

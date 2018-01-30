@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+@author Maciej Sławik <maciej.slawik@lizardmedia.pl>
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+
+        <!--Here you can define a custom resource ACL to any of your adminhtml resources.-->
+        <!--User role will have to be allowed to visit the resource to access your resources.-->
+        <!--The role resources are organised in a tree-like fashion.-->
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="LizardMedia_Sample::sample_config" title="LizardMedia Sample config"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+@author Maciej Sławik <maciej.slawik@lizardmedia.pl>
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!--Dependency injection configuration that tell ObjectManager which class should be injected-->
+    <!--if a constructor has dependency from "for".-->
+    <preference for="LizardMedia\Sample\Api\ConfigProviderInterface"
+                type="LizardMedia\Sample\Helper\ConfigProvider" />
+
+</config>
