@@ -4,9 +4,22 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
+    <!--Preference section-->
+
     <!--Dependency injection configuration that tell ObjectManager which class should be injected-->
     <!--if a constructor has dependency from "for".-->
     <preference for="LizardMedia\Sample\Api\ConfigProviderInterface"
                 type="LizardMedia\Sample\Helper\ConfigProvider" />
+
+    <preference for="LizardMedia\Sample\Api\Data\SampleInterface"
+                type="LizardMedia\Sample\Model\Data\Sample" />
+
+    <preference for="LizardMedia\Sample\Api\Data\SampleRepositoryInterface"
+                type="LizardMedia\Sample\Model\SampleRepository" />
+
+    <preference for="LizardMedia\Sample\Api\Data\SampleSearchResultInterface"
+                type="LizardMedia\Sample\Model\Data\SampleSearchResult" />
+
+    <!--End of preference section-->
 
 </config>
