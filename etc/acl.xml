@@ -17,6 +17,7 @@
                         </resource>
                     </resource>
                 </resource>
+                <resource id="LizardMedia_Sample::sample_manage" title="LizardMedia Sample manage" sortOrder="100"/>
             </resource>
         </resources>
     </acl>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+@author Maciej Sławik <maciej.slawik@lizardmedia.pl>
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <!--We define an item for the main menu in admin panel. If no parent is specified-->
+        <!--then a whole tab is created. We can define sort order of the new element and ACL-->
+        <!--resource needed to see the item in the menu.-->
+        <add id="LizardMedia_Sample::main_menu" title="Lizard Media"
+             module="LizardMedia_Sample" sortOrder="80"
+             resource="LizardMedia_Sample::sample_manage" />
+        <add id="LizardMedia_Sample::sample_list" title="Samples"
+             module="LizardMedia_Sample" sortOrder="1" parent="LizardMedia_Sample::main_menu"
+             action="sample/sample/index" resource="LizardMedia_Sample::sample_manage" />
+    </menu>
+</config>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+@author Maciej Sławik <maciej.slawik@lizardmedia.pl>
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd">
+    <!--Here we define the base route to the controllers of our module for the admin panel-->
+    <router id="admin">
+        <route id="sample" frontName="sample">
+            <module name="LizardMedia_Sample" />
+        </route>
+    </router>
+</config>

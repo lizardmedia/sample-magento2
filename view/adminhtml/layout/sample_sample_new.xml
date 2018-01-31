@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!--
+@author Maciej Sławik <maciej.slawik@lizardmedia.pl>
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <!--The new action uses the same form as the edit action so we can inject it here without copying.-->
+    <update handle="sample_sample_edit"/>
+    <body/>
+</page>
