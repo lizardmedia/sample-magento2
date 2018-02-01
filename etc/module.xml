@@ -11,9 +11,9 @@
         <!--Magento will make sure your module is loaded after them.-->
 
         <!--Like that-->
-        <!--<sequence>-->
-            <!--<module name="Magento_Catalog"/>-->
-        <!--</sequence>-->
+        <sequence>
+            <module name="Magento_Catalog"/>
+        </sequence>
 
     </module>
 

@@ -20,6 +20,11 @@
     <preference for="LizardMedia\Sample\Api\Data\SampleSearchResultInterface"
                 type="LizardMedia\Sample\Model\Data\SampleSearchResult" />
 
+
+    <!--You can also use preference to overwrite a class-->
+    <preference for="Magento\Catalog\Controller\Adminhtml\Product\Save"
+                type="LizardMedia\Sample\Controller\Adminhtml\Product\Save" />
+
     <!--End of preference section-->
 
 
@@ -59,4 +64,34 @@
     </virtualType>
     <!--End of UI component listing data providers section-->
 
+    <!--Logger virtual type-->
+    <virtualType name="sampleLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers"  xsi:type="array">
+                <item name="debug" xsi:type="object">LizardMedia\Sample\Logger\Handler\Sample</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!--End of logger virtual type-->
+
+    <!--Dependency injection section-->
+    <type name="LizardMedia\Sample\Observer\ProductSaveController">
+        <arguments>
+            <argument name="logger" xsi:type="object">sampleLogger</argument>
+        </arguments>
+    </type>
+
+    <type name="LizardMedia\Sample\Plugin\ProductResource">
+        <arguments>
+            <argument name="logger" xsi:type="object">sampleLogger</argument>
+        </arguments>
+    </type>
+    <!--End of dependency injection section-->
+
+    <!--Plugins section-->
+    <type name="Magento\Catalog\Model\ResourceModel\Product">
+        <plugin name="lizardmedia_sample_productresource" type="LizardMedia\Sample\Plugin\ProductResource" sortOrder="1" />
+    </type>
+    <!--End of plugins section-->
+    
 </config>

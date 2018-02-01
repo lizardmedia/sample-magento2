@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+@author Maciej Sławik <maciej.slawik@lizardmedia.pl>
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
+    <!--Here we declare the event we want to observe and an ObserverInterface implementation-->
+    <!--that will observe.-->
+    <event name="lizardmedia_sample_product_save_controller">
+        <observer name="lizardmedia_sample_product_save_controller_observer"
+                  instance="LizardMedia\Sample\Observer\ProductSaveController" />
+    </event>
+</config>
