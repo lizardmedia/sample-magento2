@@ -9,6 +9,14 @@
 /**
  * @var \LizardMedia\Sample\Block\Index $block
  */
+$samples = $block->getSamples();
 ?>
-<?php
-echo $block->getString();
+<div id="sample-grid-container" data-bind="scope:'sample-list'">
+    <?php foreach ($samples as $sample) : ?>
+        <p class="sample-box">
+            <?= __('ID')?>: <?= $sample->getId() ?><br/>
+            <?= __('Title')?>: <?= $sample->getId() ?><br/>
+            <?= __('Description')?>: <?= $sample->getId() ?>
+        </p>
+    <?php endforeach; ?>
+</div>
