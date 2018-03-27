@@ -15,8 +15,8 @@ $samples = $block->getSamples();
     <?php foreach ($samples as $sample) : ?>
         <p class="sample-box">
             <?= __('ID')?>: <?= $sample->getId() ?><br/>
-            <?= __('Title')?>: <?= $sample->getId() ?><br/>
-            <?= __('Description')?>: <?= $sample->getId() ?>
+            <?= __('Title')?>: <?= $sample->getTitle() ?><br/>
+            <?= __('Description')?>: <?= $sample->getDescription() ?>
         </p>
     <?php endforeach; ?>
 </div>
