@@ -10,8 +10,18 @@
             <!--We create a block that will be rendered inside "content" container, which is the main container of-->
             <!--a page. We define the class of the block, it's name and template. Optionally you can define an alias-->
             <!--and determine which block it should be before or after(using names of the blocks)-->
-            <block class="LizardMedia\Sample\Block\Index" template="LizardMedia_Sample::index.phtml"
-                   name="lizardmedia_sample_index" as="lm_smpl_index" after="-">
+            <!--Since Magento 2.2 declaring a block class is optional (a base block class will be used).-->
+            <!--Since Magento 2.2 ViewModels where introduced to provide a way of injecting data into views without-->
+            <!--creating custom block classes-->
+            <block class="LizardMedia\Sample\Block\Index"
+                   template="LizardMedia_Sample::index.phtml"
+                   name="lizardmedia_sample_index"
+                   as="lm_smpl_index"
+                   after="-"
+            >
+                <arguments>
+                    <argument name="view_model" xsi:type="object">LizardMedia\Sample\ViewModel\Index</argument>
+                </arguments>
             </block>
 
         </referenceContainer>

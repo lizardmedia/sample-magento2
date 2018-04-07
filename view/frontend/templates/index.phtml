@@ -9,7 +9,12 @@
 /**
  * @var \LizardMedia\Sample\Block\Index $block
  */
-$samples = $block->getSamples();
+
+/**
+ * @var \LizardMedia\Sample\ViewModel\Index $viewModel
+ */
+$viewModel = $block->getViewModel();
+$samples = $viewModel->getSamples();
 ?>
 <div id="sample-grid-container" data-bind="scope:'sample-list'">
     <?php foreach ($samples as $sample) : ?>
