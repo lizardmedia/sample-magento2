@@ -93,5 +93,16 @@
         <plugin name="lizardmedia_sample_productresource" type="LizardMedia\Sample\Plugin\ProductResource" sortOrder="1" />
     </type>
     <!--End of plugins section-->
+
+    <!--Console commands section-->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="sample-create"
+                      xsi:type="object">LizardMedia\Sample\Console\Command\CreateSample</item>
+            </argument>
+        </arguments>
+    </type>
+    <!--End of console commands section-->
     
 </config>
