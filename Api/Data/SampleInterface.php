@@ -20,6 +20,8 @@ interface SampleInterface
     const ID = 'entity_id';
     const TITLE = 'title';
     const DESCRIPTION = 'description';
+    const QUOTE_ID = 'quote_id';
+    const ORDER_ID = 'order_id';
 
     /**
      * @return int
@@ -53,4 +55,26 @@ interface SampleInterface
      * @return void
      */
     public function setDescription(string $description): void;
+
+    /**
+     * @return int|null
+     */
+    public function getQuoteId();
+
+    /**
+     * @param int|null $id
+     * @return void
+     */
+    public function setQuoteId($id): void;
+
+    /**
+     * @return int|null
+     */
+    public function getOrderId();
+
+    /**
+     * @param int|null $id
+     * @return void
+     */
+    public function setOrderId($id): void;
 }

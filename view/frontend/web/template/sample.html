@@ -1,0 +1,9 @@
+<div>
+    <form id="sample-checkout-form" class="form" data-bind="attr: {'data-hasrequired': $t('* Required Fields')}, event: {change: onFormChange()}">
+        <fieldset class="fieldset">
+            <!-- ko foreach: getRegion('sample-checkout-form-fields') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </fieldset>
+    </form>
+</div>

@@ -61,6 +61,40 @@ class InstallSchema implements InstallSchemaInterface
             null,
             ['nullable' => false, 'default' => Table::TIMESTAMP_INIT],
             'Create date'
+        )->addColumn(
+            'quote_id',
+            Table::TYPE_INTEGER,
+            null,
+            ['unsigned' => true, 'nullable' => true],
+            'Entity id'
+        )->addColumn(
+            'order_id',
+            Table::TYPE_INTEGER,
+            null,
+            ['unsigned' => true, 'nullable' => true],
+            'Entity id'
+        )->addForeignKey(
+            $installer->getFkName(
+                'lizardmedia_sample',
+                'quote_id',
+                'quote',
+                'entity_id'
+            ),
+            'quote_id',
+            $installer->getTable('quote'),
+            'entity_id',
+            Table::ACTION_SET_NULL
+        )->addForeignKey(
+            $installer->getFkName(
+                'lizardmedia_sample',
+                'order_id',
+                'sales_order',
+                'entity_id'
+            ),
+            'order_id',
+            $installer->getTable('sales_order'),
+            'entity_id',
+            Table::ACTION_SET_NULL
         )->setComment(
             'LizardMedia_Sample table'
         );

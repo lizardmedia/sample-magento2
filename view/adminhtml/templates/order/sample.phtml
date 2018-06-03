@@ -1,0 +1,48 @@
+<?php
+/**
+ * @var \Magento\Sales\Block\Adminhtml\Order\View $block
+ */
+$order = $block->getOrder();
+?>
+
+<?php if ($order->getExtensionAttributes() && $order->getExtensionAttributes()->getSample()) : ?>
+    <?php
+    /** @var \LizardMedia\Sample\Api\Data\SampleInterface $sample */
+    $sample = $order->getExtensionAttributes()->getSample()->getValue()
+    ?>
+    <section class="admin__page-section order-view-sample">
+        <div class="admin__page-section-title">
+            <span class="title"><?= $block->escapeHtml(__('Sample')) ?></span>
+        </div>
+        <h1><?= __('Loaded statically') ?></h1>
+        <div class="admin__page-section-content">
+
+            <h3><?= __('Title') . ': ' . $sample->getTitle() ?></h3>
+            <?= __('Description') . ': ' . $sample->getDescription() ?>
+        </div>
+
+        <h1><?= __('Loaded dynamically') ?></h1>
+        <div class="admin__page-section-content" data-bind="scope: 'sampleForOrder'">
+            <!-- ko template: getTemplate() --><!-- /ko -->
+
+            <script>
+                window.orderId = '<?= $block->getOrderId() ?>';
+            </script>
+            <script type="text/x-magento-init">
+            {
+              "*": {
+                    "Magento_Ui/js/core/app": {
+                    "components":{
+                      "sampleForOrder":{
+                        "component":"LizardMedia_Sample/js/sampleForOrder"
+                      }
+                    }
+                  }
+              }
+            }
+            </script>
+        </div>
+
+    </section>
+
+<?php endif;

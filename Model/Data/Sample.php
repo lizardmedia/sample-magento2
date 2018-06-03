@@ -69,4 +69,38 @@ class Sample extends AbstractExtensibleObject implements SampleInterface
     {
         $this->setData(self::DESCRIPTION, $description);
     }
+
+    /**
+     * @return int|null
+     */
+    public function getQuoteId()
+    {
+        return $this->_get(self::QUOTE_ID);
+    }
+
+    /**
+     * @param int|null $id
+     * @return void
+     */
+    public function setQuoteId($id): void
+    {
+        $this->setData(self::QUOTE_ID, $id);
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getOrderId()
+    {
+        return $this->_get(self::ORDER_ID);
+    }
+
+    /**
+     * @param int|null $id
+     * @return void
+     */
+    public function setOrderId($id): void
+    {
+        $this->setData(self::ORDER_ID, $id);
+    }
 }
