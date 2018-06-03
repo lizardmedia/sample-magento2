@@ -24,4 +24,22 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+
+    <!--API endpoints for saving sample data in checkout-->
+    <route url="/V1/carts/mine/set-sample-form-fields" method="POST">
+        <service class="LizardMedia\Sample\Api\Data\SampleRepositoryInterface" method="saveSampleFromCheckout"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/guest-carts/:cartId/set-sample-form-fields" method="POST">
+        <service class="LizardMedia\Sample\Api\Data\SampleRepositoryInterface" method="saveSampleFromGuestCheckout"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
 </routes>

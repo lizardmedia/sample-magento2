@@ -20,6 +20,9 @@
     <preference for="LizardMedia\Sample\Api\Data\SampleSearchResultInterface"
                 type="LizardMedia\Sample\Model\Data\SampleSearchResult" />
 
+    <preference for="LizardMedia\Sample\Api\Data\SampleExtensionAttributeInterface"
+                type="LizardMedia\Sample\Model\Data\SampleExtensionAttribute" />
+
 
     <!--You can also use preference to overwrite a class-->
     <preference for="Magento\Catalog\Controller\Adminhtml\Product\Save"
@@ -91,6 +94,10 @@
     <!--Plugins section-->
     <type name="Magento\Catalog\Model\ResourceModel\Product">
         <plugin name="lizardmedia_sample_productresource" type="LizardMedia\Sample\Plugin\ProductResource" sortOrder="1" />
+    </type>
+
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="order_sample_extension_attribute" type="LizardMedia\Sample\Plugin\OrderRepository"/>
     </type>
     <!--End of plugins section-->
 

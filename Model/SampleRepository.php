@@ -8,6 +8,7 @@
 
 namespace LizardMedia\Sample\Model;
 
+use LizardMedia\Sample\Api\Data\SampleInterface;
 use LizardMedia\Sample\Api\Data\SampleRepositoryInterface;
 use LizardMedia\Sample\Api\Data\SampleSearchResultInterfaceFactory;
 use LizardMedia\Sample\Api\Data\SampleSearchResultInterface;
@@ -18,6 +19,8 @@ use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Api\SortOrder;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Quote\Model\QuoteIdMaskFactory;
+use Magento\Quote\Model\ResourceModel\Quote\QuoteIdMask as QuoteIdMaskResource;
 
 //This is the implementation of the service contract of the module.
 //Public methods are the provide the API of the class.
@@ -56,22 +59,38 @@ class SampleRepository implements SampleRepositoryInterface
     private $searchResultFactory;
 
     /**
+     * @var QuoteIdMaskFactory
+     */
+    private $quoteIdMaskFactory;
+
+    /**
+     * @var QuoteIdMaskResource
+     */
+    private $quoteIdMaskResource;
+
+    /**
      * SampleRepository constructor.
      * @param SampleResource $sampleResource
      * @param SampleFactory $sampleFactory
      * @param CollectionFactory $sampleCollectionFactory
      * @param SampleSearchResultInterfaceFactory $searchResultFactory
+     * @param QuoteIdMaskFactory $quoteIdMaskFactory
+     * @param QuoteIdMaskResource $quoteIdMaskResource
      */
     public function __construct(
         SampleResource $sampleResource,
         SampleFactory $sampleFactory,
         CollectionFactory $sampleCollectionFactory,
-        SampleSearchResultInterfaceFactory $searchResultFactory
+        SampleSearchResultInterfaceFactory $searchResultFactory,
+        QuoteIdMaskFactory $quoteIdMaskFactory,
+        QuoteIdMaskResource $quoteIdMaskResource
     ) {
         $this->sampleResource = $sampleResource;
         $this->sampleFactory = $sampleFactory;
         $this->sampleCollectionFactory = $sampleCollectionFactory;
         $this->searchResultFactory = $searchResultFactory;
+        $this->quoteIdMaskFactory = $quoteIdMaskFactory;
+        $this->quoteIdMaskResource = $quoteIdMaskResource;
     }
 
     /**
@@ -89,6 +108,8 @@ class SampleRepository implements SampleRepositoryInterface
         }
         $sampleModel->setTitle($sample->getTitle());
         $sampleModel->setDescription($sample->getDescription());
+        $sampleModel->setQuoteId($sample->getQuoteId());
+        $sampleModel->setOrderId($sample->getOrderId());
         $this->sampleResource->save($sampleModel);
     }
 
@@ -146,6 +167,66 @@ class SampleRepository implements SampleRepositoryInterface
         $sampleModel = $this->sampleFactory->create();
         $this->sampleResource->load($sampleModel, $id);
         $this->sampleResource->delete($sampleModel);
+    }
+
+    /**
+     * @param int $cartId
+     * @param SampleInterface $sample
+     * @return void
+     */
+    public function saveSampleFromCheckout(int $cartId, SampleInterface $sample)
+    {
+        try {
+            $sampleToSave = $this->getByQuoteId($cartId);
+            $sampleToSave->setTitle($sample->getTitle());
+            $sampleToSave->setDescription($sample->getDescription());
+        } catch (NoSuchEntityException $e) {
+            $sampleToSave = $sample;
+            $sampleToSave->setQuoteId($cartId);
+        }
+        $this->save($sampleToSave);
+    }
+
+    /**
+     * @param string $cartId
+     * @param SampleInterface $sample
+     * @return void
+     */
+    public function saveSampleFromGuestCheckout(string $cartId, SampleInterface $sample)
+    {
+        $quoteIdMask = $this->quoteIdMaskFactory->create();
+        $this->quoteIdMaskResource->load($quoteIdMask, $cartId, 'masked_id');
+        $this->saveSampleFromCheckout((int)$quoteIdMask->getQuoteId(), $sample);
+    }
+
+    /**
+     * @param int $id
+     * @return \LizardMedia\Sample\Api\Data\SampleInterface
+     */
+    public function getByQuoteId($id)
+    {
+        /** @var Sample $sampleModel */
+        $sampleModel = $this->sampleFactory->create();
+        $this->sampleResource->load($sampleModel, $id, SampleInterface::QUOTE_ID);
+        if (!$sampleModel->getId()) {
+            throw new NoSuchEntityException();
+        }
+        return $sampleModel->getDataModel();
+    }
+
+    /**
+     * @param int $id
+     * @return \LizardMedia\Sample\Api\Data\SampleInterface
+     */
+    public function getByOrderId($id)
+    {
+        /** @var Sample $sampleModel */
+        $sampleModel = $this->sampleFactory->create();
+        $this->sampleResource->load($sampleModel, $id, SampleInterface::ORDER_ID);
+        if (!$sampleModel->getId()) {
+            throw new NoSuchEntityException();
+        }
+        return $sampleModel->getDataModel();
     }
 
     /**

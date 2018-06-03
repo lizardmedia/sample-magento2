@@ -17,6 +17,7 @@
                    template="LizardMedia_Sample::index.phtml"
                    name="lizardmedia_sample_index"
                    as="lm_smpl_index"
+                   cacheable="false"
                    after="-"
             >
                 <arguments>

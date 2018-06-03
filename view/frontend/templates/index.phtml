@@ -16,7 +16,8 @@
 $viewModel = $block->getViewModel();
 $samples = $viewModel->getSamples();
 ?>
-<div id="sample-grid-container" data-bind="scope:'sample-list'">
+<div id="sample-grid-container">
+    <h3><?= __('Loaded from view model') ?></h3>
     <?php foreach ($samples as $sample) : ?>
         <p class="sample-box">
             <?= __('ID')?>: <?= $sample->getId() ?><br/>
@@ -24,4 +25,24 @@ $samples = $viewModel->getSamples();
             <?= __('Description')?>: <?= $sample->getDescription() ?>
         </p>
     <?php endforeach; ?>
+</div>
+
+<div id="sample-grid-container-2" data-bind="scope:'sampleListComponent'">
+    <h3><?= __('Loaded from API') ?></h3>
+
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+    {
+        "#sample-grid-container-2": {
+            "Magento_Ui/js/core/app": {
+               "components": {
+                    "sampleListComponent": {
+                        "component": "LizardMedia_Sample/js/sampleList",
+                        "template" : "LizardMedia_Sample/sampleList"
+                    }
+                }
+            }
+        }
+    }
+    </script>
 </div>

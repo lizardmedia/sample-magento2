@@ -10,4 +10,9 @@
         <observer name="lizardmedia_sample_product_save_controller_observer"
                   instance="LizardMedia\Sample\Observer\ProductSaveController" />
     </event>
+
+    <!--Linking sample from checkout to a new order-->
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="lizardmedia_sample_link_to_order" instance="LizardMedia\Sample\Observer\SaveSampleToOrder" />
+    </event>
 </config>

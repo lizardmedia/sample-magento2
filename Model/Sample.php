@@ -82,6 +82,8 @@ class Sample extends AbstractModel implements IdentityInterface
         $dataObject->setId($this->getId());
         $dataObject->setDescription($this->getDescription());
         $dataObject->setTitle($this->getTitle());
+        $dataObject->setQuoteId($this->getQuoteId());
+        $dataObject->setOrderId($this->getOrderId());
         return $dataObject;
     }
 }

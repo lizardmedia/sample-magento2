@@ -1,0 +1,9 @@
+<!-- ko foreach: { data: samples(), as: 'sample' } -->
+
+<p class="sample-box">
+    <span data-bind="text: $t('ID')"></span>: <span data-bind="text: sample.id"></span><br/>
+    <span data-bind="text: $t('Title')"></span>: <span data-bind="text: sample.title"></span><br/>
+    <span data-bind="text: $t('Description')"></span>: <span data-bind="text: sample.descripion"></span>
+</p>
+<!-- /ko -->
+<button data-bind="click: loadSamples" >Reload</button>

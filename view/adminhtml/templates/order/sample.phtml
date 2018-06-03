@@ -1,0 +1,24 @@
+<?php
+/**
+ * @var \Magento\Sales\Block\Adminhtml\Order\View $block
+ */
+$order = $block->getOrder();
+?>
+
+<?php if ($order->getExtensionAttributes() && $order->getExtensionAttributes()->getSample()) : ?>
+    <?php
+    /** @var \LizardMedia\Sample\Api\Data\SampleInterface $sample */
+    $sample = $order->getExtensionAttributes()->getSample()->getValue()
+    ?>
+    <section class="admin__page-section order-view-sample">
+        <div class="admin__page-section-title">
+            <span class="title"><?= $block->escapeHtml(__('Sample')) ?></span>
+        </div>
+        <div class="admin__page-section-content">
+
+            <h3><?= __('Title') . ': ' . $sample->getTitle() ?></h3>
+            <?= __('Description') . ': ' . $sample->getDescription() ?>
+        </div>
+    </section>
+
+<?php endif;

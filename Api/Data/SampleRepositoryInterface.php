@@ -46,4 +46,30 @@ interface SampleRepositoryInterface
      * @return \LizardMedia\Sample\Api\Data\SampleSearchResultInterface
      */
     public function deleteById($id);
+
+    /**
+     * @param int $cartId
+     * @param SampleInterface $sample
+     * @return void
+     */
+    public function saveSampleFromCheckout(int $cartId, SampleInterface $sample);
+
+    /**
+     * @param string $cartId
+     * @param SampleInterface $sample
+     * @return void
+     */
+    public function saveSampleFromGuestCheckout(string $cartId, SampleInterface $sample);
+
+    /**
+     * @param int $id
+     * @return \LizardMedia\Sample\Api\Data\SampleInterface
+     */
+    public function getByQuoteId($id);
+
+    /**
+     * @param int $id
+     * @return \LizardMedia\Sample\Api\Data\SampleInterface
+     */
+    public function getByOrderId($id);
 }
