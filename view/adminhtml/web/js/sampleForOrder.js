@@ -15,43 +15,34 @@ define([
     $t) {
       'use strict';
 
-      // Fixes problem of undefined method when loading samples before
-      // component is fully loaded
-      var samples = ko.observableArray([]);
-      var page = 1;
+      var sample = ko.observable();
 
       return Component.extend({
+        defaults: {
+          template: 'LizardMedia_Sample/sampleForOrder'
+        },
 
         initialize: function() {
           this._super();
-          this.loadSamples();
+          this.loadSample();
         },
 
-        samples: function() {
-          return samples;
+        getSample: function() {
+          return sample;
         },
 
-        loadSamples: function() {
-          var url = '/rest/V1/samples/search';
-          $('body').loader('show');
+        loadSample: function() {
+          var url = '/rest/V1/samples/getByOrderId/' + window.orderId;
           $.ajax({
             url: urlFormatter.build(url),
             global: false,
             contentType: 'application/json',
             type: 'GET',
-            data: {
-              'searchCriteria[pageSize]': 1,
-              'searchCriteria[currentPage]': page,
-            },
             async: true,
           }).done(function(response) {
-                samples(response);
-                page = page + 1;
+                sample(response);
               }
           ).fail(function(response) {
-              }
-          ).always(function(response) {
-                $('body').loader('hide');
               }
           );
         },

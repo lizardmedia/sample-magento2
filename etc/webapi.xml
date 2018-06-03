@@ -24,6 +24,12 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+    <route method="GET" url="/V1/samples/getByOrderId/:id">
+        <service class="LizardMedia\Sample\Api\Data\SampleRepositoryInterface" method="getByOrderId"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
 
     <!--API endpoints for saving sample data in checkout-->
     <route url="/V1/carts/mine/set-sample-form-fields" method="POST">

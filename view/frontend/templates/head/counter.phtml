@@ -1,0 +1,18 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+?>
+
+<div id="cart-counter" data-bind="scope: 'cartcounter'">
+    <span data-bind="text: $t('Products in cart')"></span>:<span data-bind="text: cartcounter().count"></span>
+</div>
+
+<script type="text/x-magento-init">
+{
+    "#cart-counter": {
+        "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout(); ?>
+    }
+}
+</script>
+

@@ -89,6 +89,7 @@
             <argument name="logger" xsi:type="object">sampleLogger</argument>
         </arguments>
     </type>
+
     <!--End of dependency injection section-->
 
     <!--Plugins section-->
