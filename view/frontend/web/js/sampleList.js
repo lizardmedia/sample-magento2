@@ -45,7 +45,7 @@ define([
             },
             async: true,
           }).done(function(response) {
-                samples(response);
+                samples(response.items);
                 page = page + 1;
               }
           ).fail(function(response) {

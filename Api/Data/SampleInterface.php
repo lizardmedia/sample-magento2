@@ -26,13 +26,13 @@ interface SampleInterface
     /**
      * @return int
      */
-    public function getId(): int;
+    public function getId();
 
     /**
      * @param int $id
      * @return void
      */
-    public function setId(int $id): void;
+    public function setId($id);
 
     /**
      * @return string

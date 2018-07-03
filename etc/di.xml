@@ -9,19 +9,16 @@
     <!--Dependency injection configuration that tell ObjectManager which class should be injected-->
     <!--if a constructor has dependency from "for".-->
     <preference for="LizardMedia\Sample\Api\ConfigProviderInterface"
-                type="LizardMedia\Sample\Helper\ConfigProvider" />
+                type="LizardMedia\Sample\Model\Config\ConfigProvider" />
 
     <preference for="LizardMedia\Sample\Api\Data\SampleInterface"
-                type="LizardMedia\Sample\Model\Data\Sample" />
+                type="LizardMedia\Sample\Model\Sample" />
 
     <preference for="LizardMedia\Sample\Api\Data\SampleRepositoryInterface"
                 type="LizardMedia\Sample\Model\SampleRepository" />
 
     <preference for="LizardMedia\Sample\Api\Data\SampleSearchResultInterface"
                 type="LizardMedia\Sample\Model\Data\SampleSearchResult" />
-
-    <preference for="LizardMedia\Sample\Api\Data\SampleExtensionAttributeInterface"
-                type="LizardMedia\Sample\Model\Data\SampleExtensionAttribute" />
 
 
     <!--You can also use preference to overwrite a class-->

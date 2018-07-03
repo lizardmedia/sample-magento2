@@ -14,7 +14,7 @@
  * @var \LizardMedia\Sample\ViewModel\Index $viewModel
  */
 $viewModel = $block->getViewModel();
-$samples = $viewModel->getSamples();
+$samples = $viewModel->getSamples()->getItems();
 ?>
 <div id="sample-grid-container">
     <h3><?= __('Loaded from view model') ?></h3>

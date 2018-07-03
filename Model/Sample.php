@@ -9,7 +9,7 @@
 namespace LizardMedia\Sample\Model;
 
 use LizardMedia\Sample\Api\Data\SampleInterface;
-use LizardMedia\Sample\Model\Data\SampleFactory;
+use LizardMedia\Sample\Model\SampleFactory;
 use Magento\Framework\Data\Collection\AbstractDb;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Model\AbstractModel;
@@ -23,7 +23,7 @@ use Magento\Framework\Registry;
  * Class Sample
  * @package LizardMedia\Sample\Model
  */
-class Sample extends AbstractModel implements IdentityInterface
+class Sample extends AbstractModel implements IdentityInterface, SampleInterface
 {
     const CACHE_TAG = 'lizardmedia_sample';
 
@@ -73,17 +73,70 @@ class Sample extends AbstractModel implements IdentityInterface
     }
 
     /**
-     * @return SampleInterface
+     * @return string
      */
-    public function getDataModel(): SampleInterface
+    public function getTitle(): string
     {
-        /** @var SampleInterface $dataObject */
-        $dataObject = $this->sampleDataFactory->create();
-        $dataObject->setId($this->getId());
-        $dataObject->setDescription($this->getDescription());
-        $dataObject->setTitle($this->getTitle());
-        $dataObject->setQuoteId($this->getQuoteId());
-        $dataObject->setOrderId($this->getOrderId());
-        return $dataObject;
+        return (string)$this->getData(self::TITLE);
+    }
+
+    /**
+     * @param string $title
+     * @return void
+     */
+    public function setTitle(string $title): void
+    {
+        $this->setData(self::TITLE, $title);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return (string)$this->getData(self::DESCRIPTION);
+    }
+
+    /**
+     * @param string $description
+     * @return void
+     */
+    public function setDescription(string $description): void
+    {
+        $this->setData(self::DESCRIPTION, $description);
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getQuoteId()
+    {
+        return $this->getData(self::QUOTE_ID);
+    }
+
+    /**
+     * @param int|null $id
+     * @return void
+     */
+    public function setQuoteId($id): void
+    {
+        $this->setData(self::QUOTE_ID, $id);
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getOrderId()
+    {
+        return $this->getData(self::ORDER_ID);
+    }
+
+    /**
+     * @param int|null $id
+     * @return void
+     */
+    public function setOrderId($id): void
+    {
+        $this->setData(self::ORDER_ID, $id);
     }
 }

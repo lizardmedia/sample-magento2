@@ -6,7 +6,7 @@
  * Github:      https://github.com/maciejslawik
  */
 
-namespace LizardMedia\Sample\Helper;
+namespace LizardMedia\Sample\Model\Config;
 
 //Implementation of the config provider API
 //It's good practise to create a consistent config provider for your configuration
@@ -16,7 +16,7 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 
 /**
  * Class ConfigProvider
- * @package LizardMedia\Sample\Helper
+ * @package LizardMedia\Sample\Model\Config
  */
 class ConfigProvider implements ConfigProviderInterface
 {

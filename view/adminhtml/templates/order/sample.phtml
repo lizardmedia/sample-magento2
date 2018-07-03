@@ -8,7 +8,7 @@ $order = $block->getOrder();
 <?php if ($order->getExtensionAttributes() && $order->getExtensionAttributes()->getSample()) : ?>
     <?php
     /** @var \LizardMedia\Sample\Api\Data\SampleInterface $sample */
-    $sample = $order->getExtensionAttributes()->getSample()->getValue()
+    $sample = $order->getExtensionAttributes()->getSample()
     ?>
     <section class="admin__page-section order-view-sample">
         <div class="admin__page-section-title">

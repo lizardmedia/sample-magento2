@@ -9,6 +9,7 @@
 namespace LizardMedia\Sample\ViewModel;
 
 use LizardMedia\Sample\Api\Data\SampleRepositoryInterface;
+use LizardMedia\Sample\Api\Data\SampleSearchResultInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
@@ -32,7 +33,7 @@ class Index implements ArgumentInterface
     private $searchCriteriaBuilder;
 
     /**
-     * @var array
+     * @var SampleSearchResultInterface|null
      */
     private $samples;
 
@@ -50,9 +51,9 @@ class Index implements ArgumentInterface
     }
 
     /**
-     * @return \LizardMedia\Sample\Api\Data\SampleInterface[]
+     * @return \LizardMedia\Sample\Api\Data\SampleSearchResultInterface
      */
-    public function getSamples(): array
+    public function getSamples(): SampleSearchResultInterface
     {
         if (!$this->samples) {
             $searchCriteria = $this->searchCriteriaBuilder->create();

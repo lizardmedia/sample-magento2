@@ -15,6 +15,7 @@ use LizardMedia\Sample\Api\Data\SampleSearchResultInterface;
 use LizardMedia\Sample\Model\ResourceModel\Sample as SampleResource;
 use LizardMedia\Sample\Model\ResourceModel\Sample\CollectionFactory;
 use LizardMedia\Sample\Model\SampleFactory;
+use LizardMedia\Sample\Traits\RepositorySearchResultBuilderTrait;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Api\SortOrder;
@@ -38,6 +39,8 @@ use Magento\Quote\Model\ResourceModel\Quote\QuoteIdMask as QuoteIdMaskResource;
  */
 class SampleRepository implements SampleRepositoryInterface
 {
+    use RepositorySearchResultBuilderTrait;
+
     /**
      * @var SampleResource
      */
@@ -126,12 +129,12 @@ class SampleRepository implements SampleRepositoryInterface
         if (!$sampleModel->getId()) {
             throw new NoSuchEntityException();
         }
-        return $sampleModel->getDataModel();
+        return $sampleModel;
     }
 
     /**
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
-     * @return \LizardMedia\Sample\Api\Data\SampleInterface[]
+     * @return \LizardMedia\Sample\Api\Data\SampleSearchResultInterface
      */
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria)
     {
@@ -143,7 +146,9 @@ class SampleRepository implements SampleRepositoryInterface
         $this->addSortOrdersToCollection($searchCriteria, $collection);
         $this->addPagingToCollection($searchCriteria, $collection);
 
-        return $this->buildSearchResult($searchCriteria, $this->getDataObjects($collection));
+        /** @var SampleSearchResultInterface $searchResult */
+        $searchResult = $this->searchResultFactory->create();
+        return $this->buildSearchResult($searchCriteria, $searchResult, $collection);
     }
 
     /**
@@ -202,6 +207,7 @@ class SampleRepository implements SampleRepositoryInterface
     /**
      * @param int $id
      * @return \LizardMedia\Sample\Api\Data\SampleInterface
+     * @throws NoSuchEntityException
      */
     public function getByQuoteId($id)
     {
@@ -211,12 +217,13 @@ class SampleRepository implements SampleRepositoryInterface
         if (!$sampleModel->getId()) {
             throw new NoSuchEntityException();
         }
-        return $sampleModel->getDataModel();
+        return $sampleModel;
     }
 
     /**
      * @param int $id
      * @return \LizardMedia\Sample\Api\Data\SampleInterface
+     * @throws NoSuchEntityException
      */
     public function getByOrderId($id)
     {
@@ -226,7 +233,7 @@ class SampleRepository implements SampleRepositoryInterface
         if (!$sampleModel->getId()) {
             throw new NoSuchEntityException();
         }
-        return $sampleModel->getDataModel();
+        return $sampleModel;
     }
 
     /**
@@ -245,61 +252,5 @@ class SampleRepository implements SampleRepositoryInterface
             }
             $collection->addFieldToFilter($fields, $conditions);
         }
-    }
-
-    /**
-     * @param SearchCriteriaInterface $searchCriteria
-     * @param SampleResource\Collection $collection
-     */
-    private function addSortOrdersToCollection(
-        SearchCriteriaInterface $searchCriteria,
-        SampleResource\Collection $collection
-    ) {
-        foreach ((array)$searchCriteria->getSortOrders() as $sortOrder) {
-            $direction = $sortOrder->getDirection() == SortOrder::SORT_ASC ? 'asc' : 'desc';
-            $collection->addOrder($sortOrder->getField(), $direction);
-        }
-    }
-
-    /**
-     * @param SearchCriteriaInterface $searchCriteria
-     * @param SampleResource\Collection $collection
-     */
-    private function addPagingToCollection(
-        SearchCriteriaInterface $searchCriteria,
-        SampleResource\Collection $collection
-    ) {
-        $collection->setPageSize($searchCriteria->getPageSize());
-        $collection->setCurPage($searchCriteria->getCurrentPage());
-    }
-
-    private function getDataObjects(SampleResource\Collection $collection): array
-    {
-        $collection->load();
-        $sampleDataObjects = [];
-        /** @var Sample $item */
-        foreach ($collection as $item) {
-            $sampleDataObjects[] = $item->getDataModel();
-        }
-        return $sampleDataObjects;
-    }
-
-    /**
-     * @param SearchCriteriaInterface $searchCriteria
-     * @param array $sampleDataObjects
-     * @return \LizardMedia\Sample\Api\Data\SampleInterface[]
-     */
-    private function buildSearchResult(
-        SearchCriteriaInterface $searchCriteria,
-        array $sampleDataObjects
-    ) {
-        /** @var SampleSearchResultInterface $searchResults */
-        $searchResults = $this->searchResultFactory->create();
-
-        $searchResults->setSearchCriteria($searchCriteria);
-        $searchResults->setItems($sampleDataObjects);
-        $searchResults->setTotalCount(count($sampleDataObjects));
-
-        return $searchResults->getItems();
     }
 }

@@ -14,8 +14,6 @@ use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use LizardMedia\Sample\Api\Data\SampleRepositoryInterface;
 use Magento\Sales\Api\Data\OrderExtensionFactory;
-use LizardMedia\Sample\Api\Data\SampleExtensionAttributeInterface;
-use LizardMedia\Sample\Api\Data\SampleExtensionAttributeInterfaceFactory;
 
 /**
  * Class OrderRepository
@@ -34,24 +32,16 @@ class OrderRepository
     private $extensionFactory;
 
     /**
-     * @var SampleExtensionAttributeInterfaceFactory
-     */
-    private $sampleExtensionAttributeFactory;
-
-    /**
      * SaveSampleToOrder constructor.
      * @param SampleRepositoryInterface $sampleRepository
      * @param OrderExtensionFactory $extensionFactory
-     * @param SampleExtensionAttributeInterfaceFactory $sampleExtensionAttributeFactory
      */
     public function __construct(
         SampleRepositoryInterface $sampleRepository,
-        OrderExtensionFactory $extensionFactory,
-        SampleExtensionAttributeInterfaceFactory $sampleExtensionAttributeFactory
+        OrderExtensionFactory $extensionFactory
     ) {
         $this->sampleRepository = $sampleRepository;
         $this->extensionFactory = $extensionFactory;
-        $this->sampleExtensionAttributeFactory = $sampleExtensionAttributeFactory;
     }
 
     /**
@@ -63,7 +53,7 @@ class OrderRepository
     {
         if ($result->getExtensionAttributes() && $result->getExtensionAttributes()->getSample()) {
             /** @var SampleInterface $sample */
-            $sample = $result->getExtensionAttributes()->getSample()->getValue();
+            $sample = $result->getExtensionAttributes()->getSample();
             $sample->setOrderId((int)$result->getEntityId());
             $this->sampleRepository->save($sample);
         }
@@ -79,12 +69,9 @@ class OrderRepository
     {
         try {
             $sample = $this->sampleRepository->getByOrderId((int)$result->getEntityId());
-            /** @var SampleExtensionAttributeInterface $sampleExtensionAttribute */
-            $sampleExtensionAttribute = $this->sampleExtensionAttributeFactory->create();
-            $sampleExtensionAttribute->setValue($sample);
 
             $extensionAtrributes = $result->getExtensionAttributes() ?? $this->extensionFactory->create();
-            $extensionAtrributes->setSample($sampleExtensionAttribute);
+            $extensionAtrributes->setSample($sample);
             $result->setExtensionAttributes($extensionAtrributes);
         } catch (Exception $e) {
         }

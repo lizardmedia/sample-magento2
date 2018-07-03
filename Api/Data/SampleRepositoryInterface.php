@@ -31,7 +31,7 @@ interface SampleRepositoryInterface
 
     /**
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
-     * @return \LizardMedia\Sample\Api\Data\SampleInterface[]
+     * @return \LizardMedia\Sample\Api\Data\SampleSearchResultInterface
      */
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
 

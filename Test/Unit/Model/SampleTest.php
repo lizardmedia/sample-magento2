@@ -9,8 +9,7 @@
 namespace LizardMedia\Sample\Test\Unit\Model;
 
 use LizardMedia\Sample\Api\Data\SampleInterface;
-use LizardMedia\Sample\Model\Data\Sample as SampleDataModel;
-use LizardMedia\Sample\Model\Data\SampleFactory;
+use LizardMedia\Sample\Model\SampleFactory;
 use LizardMedia\Sample\Model\ResourceModel\Sample as SampleResource;
 use LizardMedia\Sample\Model\Sample;
 use Magento\Framework\Api\AttributeValueFactory;
@@ -90,46 +89,5 @@ class SampleTest extends TestCase
             [$expectedIdentity],
             $this->sample->getIdentities()
         );
-    }
-
-    /**
-     * @test
-     */
-    public function testGetDataModel()
-    {
-        $extensionFactory = $this->getMockBuilder(ExtensionAttributesFactory::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $attributeValueFactory = $this->getMockBuilder(AttributeValueFactory::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $dataModel = $this->objectManager->getObject(
-            SampleDataModel::class,
-            [
-                'extensionFactory' => $extensionFactory,
-                'attributeValueFactory' => $attributeValueFactory,
-                'data' => []
-            ]
-        );
-
-        $this->sampleFactory->expects($this->once())
-            ->method('create')
-            ->will($this->returnValue($dataModel));
-
-        $expectedId = 1;
-        $expectedDescription = 'Sample description';
-        $expectedTitle = 'Sample title';
-        $this->sample->setId($expectedId);
-        $this->sample->setDescription($expectedDescription);
-        $this->sample->setTitle($expectedTitle);
-
-        $sampleDataModel = $this->sample->getDataModel();
-
-        $this->assertInstanceOf(SampleInterface::class, $sampleDataModel);
-        $this->assertEquals($expectedId, $sampleDataModel->getId());
-        $this->assertEquals($expectedDescription, $sampleDataModel->getDescription());
-        $this->assertEquals($expectedTitle, $sampleDataModel->getTitle());
     }
 }

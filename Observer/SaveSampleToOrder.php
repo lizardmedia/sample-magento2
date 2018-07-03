@@ -15,8 +15,6 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Quote\Model\Quote;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Api\Data\OrderExtensionFactory;
-use LizardMedia\Sample\Api\Data\SampleExtensionAttributeInterface;
-use LizardMedia\Sample\Api\Data\SampleExtensionAttributeInterfaceFactory;
 
 /**
  * Class SaveSampleToOrder
@@ -35,24 +33,16 @@ class SaveSampleToOrder implements ObserverInterface
     private $extensionFactory;
 
     /**
-     * @var SampleExtensionAttributeInterfaceFactory
-     */
-    private $sampleExtensionAttributeFactory;
-
-    /**
      * SaveSampleToOrder constructor.
      * @param SampleRepositoryInterface $sampleRepository
      * @param OrderExtensionFactory $extensionFactory
-     * @param SampleExtensionAttributeInterfaceFactory $sampleExtensionAttributeFactory
      */
     public function __construct(
         SampleRepositoryInterface $sampleRepository,
-        OrderExtensionFactory $extensionFactory,
-        SampleExtensionAttributeInterfaceFactory $sampleExtensionAttributeFactory
+        OrderExtensionFactory $extensionFactory
     ) {
         $this->sampleRepository = $sampleRepository;
         $this->extensionFactory = $extensionFactory;
-        $this->sampleExtensionAttributeFactory = $sampleExtensionAttributeFactory;
     }
 
     /**
@@ -69,10 +59,7 @@ class SaveSampleToOrder implements ObserverInterface
             $sample = $this->sampleRepository->getByQuoteId((int)$quote->getId());
             $extensionAttributes = $order->getExtensionAttributes() ?? $this->extensionFactory->create();
 
-            /** @var SampleExtensionAttributeInterface $sampleExtensionAttribute */
-            $sampleExtensionAttribute = $this->sampleExtensionAttributeFactory->create();
-            $sampleExtensionAttribute->setValue($sample);
-            $extensionAttributes->setSample($sampleExtensionAttribute);
+            $extensionAttributes->setSample($sample);
             $order->setExtensionAttributes($extensionAttributes);
         } catch (Exception $e) {
         }
