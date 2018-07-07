@@ -5,7 +5,8 @@
 ?>
 
 <div id="cart-counter" data-bind="scope: 'cartcounter'">
-    <span data-bind="text: $t('Products in cart')"></span>:<span data-bind="text: cartcounter().count"></span>
+    <span data-bind="text: $t('Products in cart: '), visible: cartcounter().count > 0"></span>
+    <span data-bind="text: cartcounter().count, visible: cartcounter().count > 0"></span>
 </div>
 
 <script type="text/x-magento-init">
