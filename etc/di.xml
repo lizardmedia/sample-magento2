@@ -20,6 +20,12 @@
     <preference for="LizardMedia\Sample\Api\Data\SampleSearchResultInterface"
                 type="LizardMedia\Sample\Model\Data\SampleSearchResult" />
 
+    <preference for="LizardMedia\Sample\Api\Amqp\MessageInterface"
+                type="LizardMedia\Sample\Model\Amqp\Message"/>
+
+    <preference for="LizardMedia\Sample\Api\Amqp\SubscriberInterface"
+                type="LizardMedia\Sample\Model\Amqp\Subscriber"/>
+
 
     <!--You can also use preference to overwrite a class-->
     <preference for="Magento\Catalog\Controller\Adminhtml\Product\Save"
@@ -62,9 +68,11 @@
             <argument name="resourceModel" xsi:type="string">LizardMedia\Sample\Model\ResourceModel\Sample</argument>
         </arguments>
     </virtualType>
+
     <!--End of UI component listing data providers section-->
 
     <!--Logger virtual type-->
+
     <virtualType name="sampleLogger" type="Magento\Framework\Logger\Monolog">
         <arguments>
             <argument name="handlers"  xsi:type="array">
@@ -72,9 +80,19 @@
             </argument>
         </arguments>
     </virtualType>
+
+    <virtualType name="amqpLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers"  xsi:type="array">
+                <item name="debug" xsi:type="object">LizardMedia\Sample\Logger\Handler\AmqpMessage</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
     <!--End of logger virtual type-->
 
     <!--Dependency injection section-->
+
     <type name="LizardMedia\Sample\Observer\ProductSaveController">
         <arguments>
             <argument name="logger" xsi:type="object">sampleLogger</argument>
@@ -87,9 +105,16 @@
         </arguments>
     </type>
 
+    <type name="LizardMedia\Sample\Model\Amqp\Subscriber">
+        <arguments>
+            <argument name="logger" xsi:type="object">amqpLogger</argument>
+        </arguments>
+    </type>
+
     <!--End of dependency injection section-->
 
     <!--Plugins section-->
+
     <type name="Magento\Catalog\Model\ResourceModel\Product">
         <plugin name="lizardmedia_sample_productresource" type="LizardMedia\Sample\Plugin\ProductResource" sortOrder="1" />
     </type>
@@ -97,17 +122,22 @@
     <type name="Magento\Sales\Api\OrderRepositoryInterface">
         <plugin name="order_sample_extension_attribute" type="LizardMedia\Sample\Plugin\OrderRepository"/>
     </type>
+
     <!--End of plugins section-->
 
     <!--Console commands section-->
+
     <type name="Magento\Framework\Console\CommandList">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="sample-create"
-                      xsi:type="object">LizardMedia\Sample\Console\Command\CreateSample</item>
+                <item name="lm-sample:sample-create"
+                      xsi:type="object">LizardMedia\Sample\Console\Command\CreateSampleCommand</item>
+                <item name="lm-sample:message-publish"
+                      xsi:type="object">LizardMedia\Sample\Console\Command\PublishMessageCommand</item>
             </argument>
         </arguments>
     </type>
+
     <!--End of console commands section-->
     
 </config>
