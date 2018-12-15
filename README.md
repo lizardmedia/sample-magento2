@@ -6,8 +6,8 @@ and includes most features a standard M2 module has.
 
 ### Prerequisites
 
-* Magento 2.2
-* PHP 7.1
+* Magento 2.3
+* PHP 7.2
 
 ### Installing
 
