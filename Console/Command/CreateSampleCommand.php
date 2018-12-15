@@ -1,6 +1,6 @@
 <?php
 /**
- * File:CreateSample.php
+ * File:CreateSampleCommand.php
  *
  * @author      Maciej Sławik <maciej.slawik@lizardmedia.pl>
  * Github:      https://github.com/maciejslawik
@@ -23,12 +23,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 //--desc
 
 /**
- * Class CreateSample
+ * Class CreateSampleCommand
  * @package LizardMedia\Sample\Console\Command
  */
-class CreateSample extends Command
+class CreateSampleCommand extends Command
 {
-    const COMMAND_NAME = 'lm_sample:sample-create';
+    const COMMAND_NAME = 'lm-sample:sample-create';
 
     const SAMPLE_TITLE_ARG = 'title';
     const SAMPLE_DESC_ARG = 'desc';
@@ -44,7 +44,7 @@ class CreateSample extends Command
     private $sampleFactory;
 
     /**
-     * CreateSample constructor.
+     * CreateSampleCommand constructor.
      * @param SampleRepositoryInterface $sampleRepository
      * @param SampleInterfaceFactory $sampleFactory
      * @param string|null $name

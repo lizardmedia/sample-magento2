@@ -1,6 +1,6 @@
 <?php
 /**
- * File: Sample.php
+ * File: AmqpMessage.php
  *
  * @author      Maciej Sławik <maciej.slawik@lizardmedia.pl>
  * Github:      https://github.com/maciejslawik
@@ -11,23 +11,19 @@ namespace LizardMedia\Sample\Logger\Handler;
 use Magento\Framework\Logger\Handler\Base;
 use Monolog\Logger;
 
-//Simple log handler implementation. It defines the the file to write the logs.
-//You can extends the base class further to customize e.g. the way the logs
-//are saved.
-
 /**
- * Class Sample
+ * Class AmqpMessage
  * @package LizardMedia\Sample\Logger\Handler
  */
-class Sample extends Base
+class AmqpMessage extends Base
 {
     /**
      * @var string
      */
-    protected $fileName = '/var/log/lizardmedia/sample.log';
+    protected $fileName = '/var/log/lizardmedia/amqp.log';
 
     /**
      * @var int
      */
-    protected $loggerType = Logger::DEBUG;
+    protected $loggerType = Logger::INFO;
 }

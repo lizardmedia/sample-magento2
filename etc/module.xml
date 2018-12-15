@@ -13,6 +13,7 @@
         <!--Like that-->
         <sequence>
             <module name="Magento_Catalog"/>
+            <module name="Magento_MessageQueue"/>
         </sequence>
 
     </module>

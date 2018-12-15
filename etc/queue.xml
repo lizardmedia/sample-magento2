@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+@author Maciej Sławik <maciekslawik@gmail.com>
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/queue.xsd">
+
+    <broker topic="sampleTopicConfigureMeProperly" type="amqp" exchange="magento">
+        <queue consumer="uniqueConsumerName"
+               name="uniqueConsumerName"
+               handler="LizardMedia\Sample\Model\Amqp\Subscriber::processMessage"
+               consumerInstance="Magento\Framework\MessageQueue\Consumer"/>
+    </broker>
+
+</config>
