@@ -1,0 +1,26 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+?>
+<div id="homepage-sample-widget-wrapper">
+    <div class="title">
+        <strong>
+            <?= __('Sample widget') ?>
+        </strong>
+    </div>
+    <button class="clickable" value="1"><?= __('I am button no. 1') ?></button>
+    <button class="clickable" value="2"><?= __('I am button no. 2') ?></button>
+
+    <script type="text/x-magento-init">
+    {
+        "#homepage-sample-widget-wrapper": {
+            "sampleWidget": {
+                "targets": ".clickable"
+            }
+        }
+    }
+
+
+    </script>
+</div>

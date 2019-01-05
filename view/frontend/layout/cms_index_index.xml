@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Maciej Sławik <maciej.slawik@lizardmedia.pl>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+
+            <container name="homepage_sample_widget_wrapper" htmlTag="div">
+                <block template="LizardMedia_Sample::home/sample_widget.phtml"
+                       name="homepage_sample_widget" />
+            </container>
+
+        </referenceContainer>
+    </body>
+</page>

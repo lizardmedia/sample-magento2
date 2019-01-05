@@ -48,6 +48,7 @@
                                                                                     <item name="sortOrder" xsi:type="string">10</item>
                                                                                     <item name="validation" xsi:type="array">
                                                                                         <item name="required-entry" xsi:type="string">true</item>
+                                                                                        <item name="title-pattern" xsi:type="string">2</item>
                                                                                     </item>
                                                                                 </item>
                                                                                 <item name="sample_description_field" xsi:type="array">
